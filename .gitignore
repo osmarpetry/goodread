@@ -1,0 +1,37 @@
+# Binaries
+/bin/
+/media2goodreads
+*.exe
+*.dll
+*.so
+*.dylib
+
+# Test binary
+*.test
+*.out
+
+# Go workspace
+go.work
+go.work.sum
+
+# Environment and config
+.env
+*.local
+
+# Output directory
+/out/*
+!/out/.gitkeep
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# TUI state
+.media2goodreads_state.json

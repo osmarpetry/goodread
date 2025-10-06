@@ -1,0 +1,20 @@
+[
+  {
+    "title": "The Great Book",
+    "authors": ["John Smith"],
+    "asin": "B001EXAMPLE",
+    "isbn": "0306406152",
+    "isbn13": "9780306406157",
+    "publisher": "Example Publishing",
+    "purchased": "2024-01-15",
+    "released": "2020-01-01",
+    "rating": 4.5,
+    "duration": 36000
+  },
+  {
+    "title": "Another Audiobook (Unabridged)",
+    "authors": ["Jane Doe", "Bob Wilson"],
+    "asin": "B002EXAMPLE",
+    "rating": 5.0
+  }
+]

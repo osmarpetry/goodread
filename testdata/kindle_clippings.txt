@@ -1,0 +1,15 @@
+The Kindle Book (Author Name)
+- Your Highlight on page 12 | Location 145-147 | Added on Monday, January 15, 2024 10:30:00 AM
+
+This is a sample highlight from the book.
+==========
+The Kindle Book (Author Name)
+- Your Note on page 25 | Location 300-301 | Added on Tuesday, January 16, 2024 2:15:00 PM
+
+This is a sample note.
+==========
+Another Ebook
+- Your Highlight on page 5 | Location 50-52 | Added on Wednesday, January 17, 2024 8:00:00 PM
+
+Another highlight from a different book.
+==========
