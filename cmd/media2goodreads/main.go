@@ -5,6 +5,7 @@ import (
 	"os"
 	"path/filepath"
 
+	"media2goodreads/internal/api"
 	"media2goodreads/internal/export"
 	"media2goodreads/internal/ingest"
 	"media2goodreads/internal/model"
@@ -54,6 +55,7 @@ func init() {
 	rootCmd.AddCommand(storytelCmd)
 	rootCmd.AddCommand(goodreadsCSVCmd)
 	rootCmd.AddCommand(tuiCmd)
+	rootCmd.AddCommand(webCmd)
 }
 
 func initConfig() {
@@ -357,4 +359,23 @@ var tuiCmd = &cobra.Command{
 	RunE: func(cmd *cobra.Command, args []string) error {
 		return tui.Run()
 	},
+}
+
+// Web command
+var webCmd = &cobra.Command{
+	Use:   "web",
+	Short: "Launch web UI server",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		addr, _ := cmd.Flags().GetString("addr")
+		staticDir, _ := cmd.Flags().GetString("static")
+		outDir := viper.GetString("OUT_DIR")
+		timezone := viper.GetString("TZ")
+		logger.Info("Starting web server on http://%s", addr)
+		return api.Run(addr, outDir, timezone, staticDir)
+	},
+}
+
+func init() {
+	webCmd.Flags().String("addr", "localhost:8080", "Address to listen on")
+	webCmd.Flags().String("static", "./web/dist", "Path to static frontend files")
 }

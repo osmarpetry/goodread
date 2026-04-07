@@ -1,4 +1,4 @@
-.PHONY: build lint test run tui clean install deps
+.PHONY: build lint test run tui web web-dev web-build clean install deps
 
 # Build the application
 build:
@@ -37,11 +37,25 @@ clean:
 	@rm -rf bin/
 	@rm -f coverage.out coverage.html
 
+# Start web server (builds frontend first)
+web: web-build build
+	@./bin/media2goodreads web
+
+# Start frontend dev server (requires `make build` for the API)
+web-dev:
+	@cd web && npm run dev
+
+# Build the React frontend
+web-build:
+	@echo "Building frontend..."
+	@cd web && npm install && npm run build
+
 # Install dependencies
 deps:
 	@echo "Installing dependencies..."
 	@go mod download
 	@go mod tidy
+	@cd web && npm install
 
 # Install golangci-lint (if not already installed)
 install-lint:

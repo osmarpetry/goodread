@@ -7,7 +7,7 @@ A production-ready Go application that imports your reading history from Audible
 - 📚 **Multiple Sources**: Import from Audible (via OpenAudible), Kindle, and Storytel
 - 🔄 **Unified Library**: Consolidates all your books into a single, deduplicated JSON library
 - 📊 **Goodreads Export**: Generates a CSV file that can be imported directly into Goodreads
-- 🎨 **Dual Interface**: Both a classic CLI and an interactive TUI (Text-based User Interface)
+- 🎨 **Three Interfaces**: Web UI, interactive TUI, and classic CLI
 - 🔒 **Privacy-First**: All processing happens locally—no logins, no API calls
 - ✨ **Smart Deduplication**: Merges duplicate entries using ISBN13, ISBN10, ASIN, or title+author matching
 - 🕐 **Timezone-Aware**: Properly handles date normalization and formatting
@@ -24,6 +24,7 @@ A production-ready Go application that imports your reading history from Audible
 ## Prerequisites
 
 - Go 1.22 or higher
+- Node.js 18 or higher (for the web UI)
 - (Optional) [golangci-lint](https://golangci-lint.run/welcome/install/) for development
 
 ## Installation
@@ -118,6 +119,43 @@ After generating your CSV:
 3. Click "Import books"
 
 ## Quick Start
+
+### Using the Web UI (Recommended)
+
+The web UI requires both the Go backend and the React frontend to be running.
+
+**Option A — production mode** (single command, frontend pre-built):
+
+```bash
+# Install all dependencies and build everything
+make deps
+make web
+
+# Opens the server at http://localhost:8080
+```
+
+**Option B — development mode** (hot-reload frontend, separate terminals):
+
+```bash
+# Terminal 1: build and start the Go API server
+make build
+./bin/media2goodreads web
+
+# Terminal 2: start the Vite dev server (proxies /api to localhost:8080)
+cd web && npm run dev
+
+# Open http://localhost:5173 in your browser
+```
+
+> **Important:** The frontend dev server (`npm run dev`) proxies all `/api` requests
+> to the Go backend on port 8080. You **must** have the Go server running first or
+> every API call will fail with "Internal Server Error".
+
+Custom address and static directory:
+
+```bash
+./bin/media2goodreads web --addr localhost:9000 --static ./web/dist
+```
 
 ### Using the TUI (Recommended for beginners)
 
