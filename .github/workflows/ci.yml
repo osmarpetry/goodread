@@ -1,0 +1,27 @@
+name: ci
+
+on:
+  pull_request:
+  push:
+    branches: [main, master]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  go:
+    uses: osmarpetry/.github/.github/workflows/go.yml@main
+
+  node:
+    uses: osmarpetry/.github/.github/workflows/node.yml@main
+    with:
+      working-directory: web
+
+  dependabot:
+    needs: [go, node]
+    if: github.actor == 'dependabot[bot]'
+    permissions:
+      contents: write
+      pull-requests: write
+    uses: osmarpetry/.github/.github/workflows/dependabot-automerge.yml@main
